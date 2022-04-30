@@ -14,17 +14,13 @@ jobs:
         node-version: 16
     - run: echo `ls`
     - run: echo `pwd`
+    - run: cat ./.github/workflows/p.json
     - id: set_var
       run: |
         content=`cat ./.github/workflows/p.json`
-        # the following lines are only required for multi line json
-        content="${content//'%'/'%25'}"
-        content="${content//$'\n'/'%0A'}"
-        content="${content//$'\r'/'%0D'}"
-        # end of optional handling for multi line json
         echo "::set-output name=packageJson::$content"
     - run: |
-        echo "${{fromJson(steps.set_var.outputs.packageJson)}}"
+        echo "${{steps.set_var.outputs.packageJson}}"
     - id: set-matrix
       # run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
       # run: echo "::set-output name=matrix::$(node t.js)"
