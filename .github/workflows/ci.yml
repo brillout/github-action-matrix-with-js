@@ -11,7 +11,8 @@ jobs:
       with:
         node-version: 16
     - id: set-matrix
-      run: echo "::set-output name=matrix::$(node t.js)"
+      # run: echo "::set-output name=matrix::$(node t.js)"
+      run: echo "::set-output name=matrix::$(bash s.sh)"
   job2:
     needs: job1
     runs-on: ubuntu-latest
