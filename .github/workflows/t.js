@@ -1,1 +1,1 @@
-console.log('{"include":[{"project":"foo","config":"Debug"},{"project":"bar","config":"Release"}]}')
+console.log('{"include":[{"project":"foo 11","config":"Debug"},{"project":"bar lije","config":"Release"}]}')
