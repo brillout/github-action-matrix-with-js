@@ -17,7 +17,7 @@ jobs:
     - run: echo `pwd`
     - run: cat ./.github/workflows/p.json
     - run: node ./.github/workflows/t.js
-    - run: zx ./.github/workflows/script.mjs
+    # - run: zx ./.github/workflows/script.mjs
     - run: echo he
     - id: set_var
       run: |
