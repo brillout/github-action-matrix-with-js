@@ -10,6 +10,8 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: 16
+    - run: echo ${{ ls }}
+    - run: echo ${{ pwd }}
     - id: set_var
       run: |
         content=`cat ./p.json`
