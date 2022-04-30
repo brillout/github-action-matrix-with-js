@@ -24,7 +24,7 @@ jobs:
         echo "${{steps.set_var.outputs.packageJson}}"
     - id: set-matrix
       # run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
-      run: echo "::set-output name=matrix::$(node t.js)"
+      run: echo "::set-output name=matrix::$(node ./.github/workflows/t.js)"
       # run: echo "::set-output name=matrix::$(bash s.sh)"
       # run: echo "::set-output name=matrix::$(fromJson(steps.set_var.outputs.packageJson))"
   job2:
