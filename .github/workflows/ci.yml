@@ -6,8 +6,12 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
+    - name: Set node version to 16
+      uses: actions/setup-node@v2
+      with:
+        node-version: 16
     - id: set-matrix
-      run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
+      run: echo "::set-output name=matrix::$(node t.js)"
   job2:
     needs: job1
     runs-on: ubuntu-latest
