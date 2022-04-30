@@ -10,9 +10,22 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: 16
+    - id: set_var
+      run: |
+        content=`cat ./p.json`
+        # the following lines are only required for multi line json
+        content="${content//'%'/'%25'}"
+        content="${content//$'\n'/'%0A'}"
+        content="${content//$'\r'/'%0D'}"
+        # end of optional handling for multi line json
+        echo "::set-output name=packageJson::$content"
+    - run: |
+        echo "${{fromJson(steps.set_var.outputs.packageJson)}}"
     - id: set-matrix
+      # run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
       # run: echo "::set-output name=matrix::$(node t.js)"
-      run: echo "::set-output name=matrix::$(bash s.sh)"
+      # run: echo "::set-output name=matrix::$(bash s.sh)"
+      run: echo "::set-output name=matrix::$(fromJson(steps.set_var.outputs.packageJson))"
   job2:
     needs: job1
     runs-on: ubuntu-latest
