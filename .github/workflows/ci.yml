@@ -25,7 +25,6 @@ jobs:
         content=`node ./.github/workflows/t.js`
         echo "::set-output name=matrixData::$(zx ./.github/workflows/script.mjs)"
     - run: echo "${{steps.set_var.outputs.matrixData}}"
-    - run: echo "${{fromJson(steps.set_var.outputs.matrixData).version}}"
     - id: set-matrix
       # run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
       # run: echo "::set-output name=matrix::$(node ./.github/workflows/t.js)"
