@@ -5,14 +5,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - uses: pnpm/action-setup@v2
-      with:
-        version: 7
     - uses: actions/setup-node@v3
       with:
         node-version: 18
-        cache: 'pnpm'
-    - run: pnpm add --global zx
+    - run: npm install --global zx
     - id: getMatrixData
       run: echo "::set-output name=matrixData::$(zx ./.github/workflows/getMatrixData.mjs)"
     - run: echo ${{ steps.getMatrixData.outputs.matrixData }}
