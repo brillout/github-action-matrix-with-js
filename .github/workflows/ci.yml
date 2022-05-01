@@ -11,16 +11,17 @@ jobs:
       with:
         node-version: 18
     - run: npm i -g zx
-    - id: set-matrix
-      run: echo "::set-output name=matrix::$(zx ./.github/workflows/getMatrix.mjs)"
+    - id: getMatrixData
+      run: echo "::set-output name=matrixData::$(zx ./.github/workflows/getMatrixData.mjs)"
+    - run: echo ${{ steps.getMatrixData.outputs.matrixData }}
     outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      matrix: ${{ steps.getMatrixData.outputs.matrixData }}
 
   job2:
     needs: job1
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{fromJson(needs.job1.outputs.matrix)}}
+      matrix: ${{fromJson(needs.job1.outputs.matrixData)}}
     steps:
     - run: echo ${{ matrix.project }}
     - run: echo ${{ matrix.config }}
