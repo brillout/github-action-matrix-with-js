@@ -7,4 +7,3 @@ const matrixData = tests.map(test => {
 })
 
 console.log(`{"include":${JSON.stringify(matrixData)}}`)
-//console.log('{"include":[{"project":"foo 11","config":"Debug"},{"project":"bar lije","config":"Release"}]}')

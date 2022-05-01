@@ -3,36 +3,18 @@ on: push
 jobs:
   job1:
     runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Set node version to 16
+    - name: Setup node
       uses: actions/setup-node@v2
       with:
-        node-version: 16
+        node-version: 18
     - run: npm i -g zx
-    - run: echo `ls`
-    - run: echo `pwd`
-    - run: zx ./.github/workflows/path.mjs
-    - run: cat ./.github/workflows/p.json
-    - run: node ./.github/workflows/t.js
-    # - run: zx ./.github/workflows/script.mjs
-    - run: echo he
-    - id: set_var
-      run: |
-        content=`node ./.github/workflows/t.js`
-        echo "::set-output name=matrixData::$(zx ./.github/workflows/script.mjs)"
-    - run: echo "${{steps.set_var.outputs.matrixData}}"
     - id: set-matrix
-      # run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
-      # run: echo "::set-output name=matrix::$(node ./.github/workflows/t.js)"
-      # run: echo "::set-output name=matrix::$(bash s.sh)"
-      # run: echo "::set-output name=matrix::$(fromJson(steps.set_var.outputs.matrixData))"
-      # run: echo "::set-output name=matrix::$(steps.set_var.outputs.matrixData)"
-      # run: echo "::set-output name=matrix::$(zx ./.github/workflows/script.mjs)"
-      run: echo "::set-output name=matrix::${{steps.set_var.outputs.matrixData}}"
+      run: echo "::set-output name=matrix::$(zx ./.github/workflows/getMatrix.mjs)"
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
 
   job2:
     needs: job1
