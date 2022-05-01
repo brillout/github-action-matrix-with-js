@@ -23,16 +23,18 @@ jobs:
     - id: set_var
       run: |
         content=`node ./.github/workflows/t.js`
-        echo "::set-output name=packageJson::$content"
-    - run: |
-        echo "${{steps.set_var.outputs.packageJson}}"
+        echo "::set-output name=matrixData::$(zx ./.github/workflows/script.mjs)"
+    - run: echo "${{steps.set_var.outputs.matrixData}}"
+    - run: echo "${{fromJson(steps.set_var.outputs.matrixData).version}}"
     - id: set-matrix
       # run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
       # run: echo "::set-output name=matrix::$(node ./.github/workflows/t.js)"
       # run: echo "::set-output name=matrix::$(bash s.sh)"
-      # run: echo "::set-output name=matrix::$(fromJson(steps.set_var.outputs.packageJson))"
-      # run: echo "::set-output name=matrix::$(steps.set_var.outputs.packageJson)"
-      run: echo "::set-output name=matrix::$(zx ./.github/workflows/script.mjs)"
+      # run: echo "::set-output name=matrix::$(fromJson(steps.set_var.outputs.matrixData))"
+      # run: echo "::set-output name=matrix::$(steps.set_var.outputs.matrixData)"
+      # run: echo "::set-output name=matrix::$(zx ./.github/workflows/script.mjs)"
+      run: echo "::set-output name=matrix::${{steps.set_var.outputs.matrixData).version}}"
+
   job2:
     needs: job1
     runs-on: ubuntu-latest
