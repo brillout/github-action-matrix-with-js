@@ -15,6 +15,7 @@ jobs:
     - run: npm i -g zx
     - run: echo `ls`
     - run: echo `pwd`
+    - run: zx ./.github/workflows/path.mjs
     - run: cat ./.github/workflows/p.json
     - run: node ./.github/workflows/t.js
     # - run: zx ./.github/workflows/script.mjs
