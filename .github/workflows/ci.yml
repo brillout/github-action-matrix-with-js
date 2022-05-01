@@ -31,8 +31,8 @@ jobs:
       # run: echo "::set-output name=matrix::$(bash s.sh)"
       # run: echo "::set-output name=matrix::$(fromJson(steps.set_var.outputs.matrixData))"
       # run: echo "::set-output name=matrix::$(steps.set_var.outputs.matrixData)"
-      # run: echo "::set-output name=matrix::$(zx ./.github/workflows/script.mjs)"
-      run: echo "::set-output name=matrix::${{steps.set_var.outputs.matrixData}}"
+      run: echo "::set-output name=matrix::$(zx ./.github/workflows/script.mjs)"
+      # run: echo "::set-output name=matrix::${{steps.set_var.outputs.matrixData}}"
 
   job2:
     needs: job1
